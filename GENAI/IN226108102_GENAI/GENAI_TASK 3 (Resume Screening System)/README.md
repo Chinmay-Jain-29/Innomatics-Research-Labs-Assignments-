@@ -105,5 +105,5 @@ Execute `run_debug_demo()` in `main.py` to simulate a pipeline failure.
 ---
 
 <p align="center">
-  Developed with ❤️ for Innomatics Research Labs
+  Developed By CHINMAY JAIN with Innomatics Research Labs ✌️
 </p>
