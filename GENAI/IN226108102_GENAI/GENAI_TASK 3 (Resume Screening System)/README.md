@@ -1,48 +1,109 @@
-# AI Resume Screening System
+# 🚀 SmartRecruit: AI-Powered Resume Screening System
 
-This repository contains an end-to-end AI-powered Resume Screening System utilizing LangChain (LCEL), Groq LLM, and LangSmith. It automates the extraction, matching, scoring, and evaluation explanation for candidate resumes against a job description.
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![LangChain](https://img.shields.io/badge/Powered%20by-LangChain-green.svg)](https://langchain.com/)
+[![Groq](https://img.shields.io/badge/LLM-Groq-orange.svg)](https://groq.com/)
+[![LangSmith](https://img.shields.io/badge/Tracing-LangSmith-black.svg)](https://smith.langchain.com/)
 
-## Architecture & Steps
+An advanced, end-to-end resume evaluation pipeline built with **LangChain (LCEL)** and **Groq Cloud**. This system automates the tedious task of matching candidates to job descriptions with high precision and transparent reasoning.
 
-1. **Extraction**: Extracts "skills", "experience", and "tools" from the unstructured resume text and outputs strict JSON using a few-shot Prompt Template.
-2. **Matching**: Compares extracted parameters against the job description to identify matched skills, missing skills, and a match percentage.
-3. **Scoring**: Computes a final fitness score out of 100 based on the match evaluation.
-4. **Explanation**: Summarizes reasoning, strengths, and weaknesses for the candidate.
+---
 
-## Setup Instructions
+## 🌟 Key Features
 
-1. **Install Requirements**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+- **⚡ Lightning Fast AI**: Powered by Groq's Llama-3 for near-instant inference.
+- **🔍 Precision Extraction**: Strips skills, experience, and tools into structured JSON.
+- **📊 Intelligent Scoring**: Algorithmic fitness scoring based on semantic matching.
+- **💬 Explorable Reasoning**: Generates detailed pros/cons for every candidate.
+- **🛠️ Production Observability**: Full execution tracing via **LangSmith**.
+- **🐞 Fault Tolerance Demo**: Includes a built-in debugging module to demonstrate how to catch and fix LLM hallucinations/parsing errors.
 
-2. **Configure Environment Variables**:
-   Copy `.env.example` to `.env` and fill in your keys:
-   - `GROQ_API_KEY`: Get this from Groq Console.
-   - `LANGCHAIN_API_KEY`: Get this from LangSmith.
+---
 
-3. **Run the Application**:
-   ```bash
-   python main.py
-   ```
-   This will sequentially process 3 demo candidates (Strong, Average, Weak).
+## 🏗️ System Architecture
 
-## Debugging and LangSmith Tracing
+```mermaid
+graph TD
+    JD[Job Description] --> Match[Matching Chain]
+    R[Resume Text] --> Extract[Extraction Chain]
+    Extract --> |JSON Data| Match
+    Match --> |Evaluation| Score[Scoring Chain]
+    Score --> |Fit Score| Explain[Explanation Chain]
+    Explain --> |Final Report| Output[Interactive Summary]
+    
+    subgraph Observability
+        Extract -.-> LS[LangSmith Tracing]
+        Match -.-> LS
+        Score -.-> LS
+    end
+```
 
-### LangSmith Integration
-Because `LANGCHAIN_TRACING_V2=true` is set, all executions are automatically traced. 
-We've utilized `langchain_core.runnables.RunnableConfig` to add metadata tags (e.g., `["strong", "resume_screening"]`) to each run, making filtering inside LangSmith extremely clean. 
+---
 
-### Debugging Demo ("Intentional Failure")
-In the `main.py` file, we added the `run_debug_demo()` function which deliberately uses an incorrect prompt.
-**What went wrong**: 
-The bad prompt intentionally commands the LLM to output a raw string list instead of the required JSON, AND it asks it to hallucinate "Quantum Computing". 
-As a result, `JsonOutputParser` throws an `OutputParserException` when it tries to parse a raw string representing a Python list into a JSON dictionary.
+## 🛠️ Tech Stack
 
-**How to debug with LangSmith**:
-1. Open your LangSmith Tracing Dashboard.
-2. Filter the traces by the tag `debug_demo`.
-3. You will see a trace highlighted in RED (indicating an error).
-4. Click into the trace. LangSmith perfectly visualizes the Directed Acyclic Graph (DAG) for LCEL pipeline. 
-5. Under `ChatGroq`, you will see the LLM successfully returned a raw bulleted list. 
-6. Under `JsonOutputParser`, you will see the exact traceback indicating why the parsing failed (expected a JSON array/object, received unstructured text). This explicitly shows that the prompt engineering rules (JSON constraints) were broken, requiring a fix in the `PrompTemplate` step.
+- **Framework**: [LangChain](https://www.langchain.com/) (using LCEL)
+- **Model**: `Llama-3-8b-8192` (via Groq)
+- **Observability**: [LangSmith](https://smith.langchain.com/)
+- **Parsing**: `JsonOutputParser`, `StrOutputParser`
+
+---
+
+## 🚀 Quick Start
+
+### 1. Prerequisites
+Ensure you have Python 3.8+ installed.
+
+### 2. Installation
+```bash
+git clone https://github.com/Chinmay-Jain-29/Innomatics-Research-Labs-Assignments-.git
+cd "GENAI/IN226108102_GENAI/GENAI_TASK 3 (Resume Screening System)"
+pip install -r requirements.txt
+```
+
+### 3. Environment Setup
+Create a `.env` file in the root directory:
+```env
+GROQ_API_KEY=your_groq_key
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_langsmith_key
+LANGCHAIN_PROJECT="Resume-Screener"
+```
+
+### 4. Run Evaluation
+```bash
+python main.py
+```
+
+---
+
+## 📈 Debugging with LangSmith
+
+This project demonstrates professional-grade debugging techniques. 
+
+### The "Intentional Failure" Scenario
+Execute `run_debug_demo()` in `main.py` to simulate a pipeline failure.
+- **The Error**: The LLM is forced to return unstructured text instead of JSON.
+- **The Fix**: Open your **LangSmith Dashboard**, filter by tag `debug_demo`, and visualize the exact point of the `OutputParserException`. 
+
+> [!TIP]
+> Use this to identify where prompt engineering needs to be tightened or where your LLM is hallucinating technical data!
+
+---
+
+## 📂 Project Structure
+
+```text
+├── chains/             # Specialized LCEL chains (Extraction, Scoring, etc.)
+├── prompts/            # Sophisticated Prompt Templates
+├── data/               # Demo resumes (Strong, Average, Weak)
+├── main.py             # Entry point / Execution Logic
+├── requirements.txt    # Dependencies
+└── .env                # API Keys (Ignored)
+```
+
+---
+
+<p align="center">
+  Developed with ❤️ for Innomatics Research Labs
+</p>
