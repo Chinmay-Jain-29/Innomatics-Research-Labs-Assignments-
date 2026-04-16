@@ -1,0 +1,24 @@
+Charlie Davis
+Location: Austin, TX | Email: charlie.davis@email.com
+
+Objective:
+Creative Frontend Developer passionate about building user-friendly web applications. Currently exploring backend tools and keen to learn new technologies.
+
+Experience:
+Frontend Engineer | WebStack Solutions | May 2018 - Present
+- Developed responsive single-page applications using React.js and Redux.
+- Collaborated with UX/UI designers to implement pixel-perfect user interfaces using CSS3, HTML5, and Tailwind.
+- Improved website load times by 20% through code splitting and asset optimization.
+- Interacted with RESTful APIs using Axios and Fetch.
+
+Junior Developer | Startup Inc | Jan 2016 - April 2018
+- Maintained legacy PHP codebase and fixed UI bugs.
+- Managed version control with Git and GitHub.
+
+Education:
+Bachelor of Science in Computer Science | Texas Tech University | 2015
+
+Skills & Tools:
+JavaScript, HTML, CSS, React.js, Redux, Node.js
+Tailwind CSS, Bootstrap
+Git, Webpack, Figma

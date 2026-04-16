@@ -1,0 +1,27 @@
+Alice Smith
+Location: New York, NY | Email: alice.smith@email.com
+
+Profile:
+Results-oriented Data Scientist with 4 years of experience specializing in predictive modeling, machine learning, and data analytics. Adept at building scalable ML solutions to solve complex business problems.
+
+Experience:
+Data Scientist | TechCorp Inc | Jan 2021 - Present
+- Developed and deployed machine learning models using Python and PyTorch that improved customer retention by 15%.
+- Built automated ETL pipelines to extract, clean, and transform data from diverse SQL databases.
+- Created interactive dashboards in Tableau to visualize KPIs for executive stakeholders.
+- Mentored junior analysts in predictive modeling and best practices in Scikit-learn.
+
+Data Analyst | DataDrive LLC | Aug 2019 - Dec 2020
+- Wrote complex SQL queries to extract insights from relational databases.
+- Utilized Pandas and NumPy for exploratory data analysis.
+
+Education:
+Master of Science in Data Science | New York University | 2019
+Bachelor of Science in Mathematics | State University | 2017
+
+Skills & Tools:
+Machine Learning, Predictive Modeling, Exploratory Data Analysis (EDA)
+Python, SQL, R
+TensorFlow, PyTorch, Scikit-learn, Pandas, NumPy
+Tableau, Matplotlib
+AWS, Docker, Git

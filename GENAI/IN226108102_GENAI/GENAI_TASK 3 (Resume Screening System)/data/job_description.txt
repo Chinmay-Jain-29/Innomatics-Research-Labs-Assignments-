@@ -1,0 +1,20 @@
+Job Title: Data Scientist
+
+Role Summary:
+We are looking for a Data Scientist to analyze large amounts of raw information to find patterns that will help improve our company. We will rely on you to build data products to extract valuable business insights.
+
+Requirements:
+- 3+ years of experience as a Data Scientist or Data Analyst
+- Strong knowledge of Python and SQL
+- Experience with Machine Learning frameworks like Scikit-learn, TensorFlow, or PyTorch
+- Proficiency with data visualization tools like Tableau or Matplotlib
+- Experience in building predictive models and writing ETL pipelines
+- Excellent communication and presentation skills
+- Degree in Computer Science, Statistics, Mathematics or similar quantitative field
+
+Desired Tools/Technologies:
+- Python, SQL, R
+- Pandas, NumPy, Scikit-learn
+- TensorFlow, PyTorch, Keras
+- Tableau, PowerBI, Matplotlib, Seaborn
+- Git, AWS, Docker

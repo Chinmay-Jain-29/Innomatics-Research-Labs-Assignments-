@@ -1,0 +1,21 @@
+Bob Jones
+Location: San Francisco, CA | Email: bob.jones@email.com
+
+Summary:
+Data Analyst with 2 years of experience focused on data reporting and visualization. Looking to transition into a more data science-heavy role.
+
+Experience:
+Data Analyst | Insights Co | March 2022 - Present
+- Cleaned and prepared large datasets using Python and Pandas.
+- Generated weekly and monthly reports for the marketing team using SQL.
+- Designed comprehensive visual reports using PowerBI and Excel.
+- Assisted in A/B testing analysis.
+
+Education:
+Bachelor of Arts in Economics | University of California | 2021
+
+Skills:
+Data Cleaning, Reporting, A/B Testing
+Python, SQL
+Pandas, Excel, PowerBI
+Basic knowledge of machine learning concepts (linear regression)
