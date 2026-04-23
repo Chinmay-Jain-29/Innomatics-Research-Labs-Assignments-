@@ -29,25 +29,37 @@ def create_workflow(retriever):
         
         context = "\n\n".join([doc.page_content for doc in docs]) if docs else "No background documents found."
         
-        prompt = f"""You are a helpful customer support assistant.
+        prompt = f"""You are an advanced Customer Support AI. 
 
-Background Knowledge:
+### Instructions:
+1. Use the **Background Knowledge** and **Recent Conversation History** below to answer the user's question.
+2. The Background Knowledge may contain snippets from documents OR previously answered questions by human agents (formatted as 'Question: ... Answer: ...').
+3. If you find a previously answered question in the Background Knowledge that is the same or very similar to the current User Question, you **MUST** provide that specific Answer.
+4. If the answer is not present in the provided context or history, strictly say "I don't know" and nothing else.
+5. Do not mention that you are using background knowledge; just provide the answer.
+
+### Background Knowledge (Documents & Memory):
 {context}
 
-Recent Conversation History:
+### Recent Conversation History:
 {chat_history}
 
-User Question:
+### User Question:
 {query}
 
-Answer clearly based ONLY on the Background Knowledge and Recent Conversation History. If you cannot answer based on these, strictly say "I don't know"."""
+Answer:"""
         
         response = llm.invoke(prompt)
         answer = response.content
         
-        # Simple confidence heuristic
-        confidence = 0.9 if "I don't know" not in answer else 0.1
-        needs_human = confidence < 0.6
+        # Simple confidence heuristic: If model says "I don't know" anywhere, we assume low confidence
+        # But we check if it's the STRICT 'I don't know' we asked for.
+        if answer.strip().lower() == "i don't know" or "i don't know" in answer.lower():
+            confidence = 0.1
+        else:
+            confidence = 1.0
+            
+        needs_human = confidence < 0.5
         
         return {"answer": answer, "confidence": confidence, "needs_human": needs_human}
         

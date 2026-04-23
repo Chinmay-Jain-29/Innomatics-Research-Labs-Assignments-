@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Vector DB
+chroma_db/
+
+# Temp/Test files
+test_llm.py
+test_workflow.py
+output.txt
+
+# Streamlit
+.streamlit/
+
+# OS
+.DS_Store
+Thumbs.db

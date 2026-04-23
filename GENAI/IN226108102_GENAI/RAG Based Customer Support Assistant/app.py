@@ -117,12 +117,20 @@ with col1:
     
     st.header("👨‍💻 Admin Escalation")
     st.caption("Teach the AI what it doesn't know. Your answers are saved forever.")
+    
+    # Show current memory size if available
+    if "vector_store" in st.session_state:
+        try:
+            count = len(st.session_state.vector_store.get()['ids'])
+            st.info(f"🧠 Total Knowledge Chunks: {count}")
+        except:
+            pass
+
     human_response = st.text_area("Manual Agent Response:", placeholder="Type the correct answer here...")
     if st.button("🚀 Submit & Save to Memory"):
-        if "messages" in st.session_state and len(st.session_state.messages) > 0:
-            formatted_response = f"🧑‍💼 **[Human Agent]:** {human_response}"
-            st.session_state.messages.append({"role": "assistant", "content": formatted_response})
-            
+        if human_response.strip() == "":
+            st.error("Please enter a response.")
+        elif "messages" in st.session_state and len(st.session_state.messages) > 0:
             # Find the last user question
             last_user_query = ""
             for msg in reversed(st.session_state.messages):
@@ -130,17 +138,24 @@ with col1:
                     last_user_query = msg["content"]
                     break
             
+            if not last_user_query:
+                st.error("Could not find a user question to respond to.")
+                st.stop()
+
+            formatted_response = f"🧑‍💼 **[Human Agent]:** {human_response}"
+            st.session_state.messages.append({"role": "assistant", "content": formatted_response})
+            
             # 1. Save to transient Chat Memory
-            st.session_state.chat_history_str += f"Assistant: [Human Response] {human_response}\n\n"
+            st.session_state.chat_history_str += f"Human Agent: {human_response}\n\n"
             
             # 2. Add to Vector DB for PERMANENT Memory
-            if last_user_query and "vector_store" in st.session_state:
+            if "vector_store" in st.session_state:
                 new_doc = Document(
                     page_content=f"Question: {last_user_query}\nAnswer: {human_response}", 
-                    metadata={"source": "human_feedback"}
+                    metadata={"source": "human_feedback", "question": last_user_query}
                 )
                 st.session_state.vector_store.add_documents([new_doc])
-                st.success("✅ Answer sent to user AND saved to Vector Database! The AI will now know this forever.")
+                st.success(f"✅ Answer saved to Memory! The AI will now know how to answer '{last_user_query}' forever.")
             else:
                 st.warning("Sent to user, but could not save to Vector DB (not initialized).")
                 

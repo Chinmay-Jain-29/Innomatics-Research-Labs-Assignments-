@@ -12,6 +12,6 @@ def setup_vector_store(chunks, persist_directory="./chroma_db"):
     )
     return vector_store
 
-def get_retriever(vector_store, k=3):
+def get_retriever(vector_store, k=5):
     """Returns a retriever configured to fetch top_k chunks."""
     return vector_store.as_retriever(search_kwargs={"k": k})
